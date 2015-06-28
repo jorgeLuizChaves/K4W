@@ -34,8 +34,23 @@ namespace K4WHi
         void OnLoaded(object sender, RoutedEventArgs e)
         {
             _sensorChooser = new KinectSensorChooser();
-            _sensorChooser.KinectChanged += (o, args) =>
+            _sensorChooser.KinectChanged += KinectChanged;
+            _sensorChooser.PropertyChanged += PropertyChanged;
+
+            KinectSensorChooser.KinectSensorChooser = _sensorChooser;
+            _sensorChooser.Start();
+        }
+
+        void PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs args)
+        {
+            if (kinectStatus.Equals(args.PropertyName))
             {
+                Debug.WriteLine("Status = " + _sensorChooser.Status);
+            }
+        }
+
+        void KinectChanged(object sender, KinectChangedEventArgs args)
+        {
                 if (args.NewSensor != null)
                 {
                     Debug.WriteLine("we have a new sensor");
@@ -44,16 +59,6 @@ namespace K4WHi
                 {
                     Debug.WriteLine("no Kinect sensor connected");
                 }
-            };
-
-            _sensorChooser.PropertyChanged += (o, args) => 
-            {
-                if (kinectStatus.Equals(args.PropertyName))
-                {
-                    Debug.WriteLine("Status = " + _sensorChooser.Status);
-                }
-                _sensorChooser.Start();
-            };
         }
     }
 }
