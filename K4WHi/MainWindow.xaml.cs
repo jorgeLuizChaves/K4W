@@ -1,4 +1,5 @@
-﻿using Microsoft.Kinect.Toolkit;
+﻿using Microsoft.Kinect;
+using Microsoft.Kinect.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -51,14 +52,44 @@ namespace K4WHi
 
         void KinectChanged(object sender, KinectChangedEventArgs args)
         {
-                if (args.NewSensor != null)
+            bool error = false;
+
+            if (args.OldSensor != null)
+            {
+                try
                 {
-                    Debug.WriteLine("we have a new sensor");
+                    args.OldSensor.DepthStream.Disable();
+                    args.OldSensor.SkeletonStream.Disable();
+                }catch(Exception e){
+                    error = true;
                 }
-                else
+            }
+
+            if (args.NewSensor == null)
+            {
+                return;
+            }
+
+            try
+            {
+                args.NewSensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+                args.NewSensor.SkeletonStream.Enable();
+                try
                 {
-                    Debug.WriteLine("no Kinect sensor connected");
+                    args.NewSensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
+                    args.NewSensor.DepthStream.Range = DepthRange.Near;
+                    args.NewSensor.SkeletonStream.EnableTrackingInNearRange = true;
                 }
+                catch (InvalidOperationException)
+                {
+                    args.NewSensor.DepthStream.Range = DepthRange.Default;
+                    args.NewSensor.SkeletonStream.EnableTrackingInNearRange = false;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                error = true;
+            }
         }
     }
 }
