@@ -38,6 +38,7 @@ namespace K4WHi
             _sensorChooser = new KinectSensorChooser();
             _sensorChooser.KinectChanged += KinectChanged;
             _sensorChooser.PropertyChanged += PropertyChanged;
+           
 
             KinectSensorChooser.KinectSensorChooser = _sensorChooser;
             _sensorChooser.Start();
@@ -53,7 +54,8 @@ namespace K4WHi
 
         void KinectChanged(object sender, KinectChangedEventArgs args)
         {
-            KinectInteractionsConfig interactionConfig = new KinectInteractionsConfig();
+            KinectInteractionsConfig interactionConfig = new KinectInteractionsConfig(KinectRegion, KinectUserViewer);
+           
             interactionConfig.Config(sender, args);
             /**
             bool error = false;

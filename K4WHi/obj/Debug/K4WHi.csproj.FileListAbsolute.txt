@@ -14,3 +14,4 @@
 \\psf\home\documents\visual studio 2013\Projects\K4WHi\K4WHi\bin\Debug\Microsoft.Kinect.Toolkit.Interaction.dll
 \\psf\home\documents\visual studio 2013\Projects\K4WHi\K4WHi\obj\Debug\K4WHi.exe
 \\psf\home\documents\visual studio 2013\Projects\K4WHi\K4WHi\obj\Debug\K4WHi.pdb
+\\psf\home\documents\visual studio 2013\Projects\K4WHi\K4WHi\bin\Debug\KinectInteraction180_32.dll

@@ -9,5 +9,13 @@
             VerticalAlignment="Top"
             Name="KinectSensorChooser"
             />
+        <k:KinectRegion Name="KinectRegion"  >
+            <k:KinectUserViewer 
+                Name="KinectUserViewer"
+                ImageBackground="Black"
+                DefaultUserColor="Gray"
+                PrimaryUserColor="Blue"
+                />
+        </k:KinectRegion>
     </Grid>
 </Window>
