@@ -1,4 +1,5 @@
-﻿using Microsoft.Kinect;
+﻿using K4WHi.KinectInteractions;
+using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,9 @@ namespace K4WHi
 
         void KinectChanged(object sender, KinectChangedEventArgs args)
         {
+            KinectInteractionsConfig interactionConfig = new KinectInteractionsConfig();
+            interactionConfig.Config(sender, args);
+            /**
             bool error = false;
 
             if (args.OldSensor != null)
@@ -90,6 +94,7 @@ namespace K4WHi
             {
                 error = true;
             }
+             */
         }
     }
 }
